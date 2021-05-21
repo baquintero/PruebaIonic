@@ -8,8 +8,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'view360',
     pathMatch: 'full'
+  },
+  {
+    path: 'view360',
+    loadChildren: () => import('./view360/view360.module').then( m => m.View360PageModule)
   },
 ];
 
