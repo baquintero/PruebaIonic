@@ -2,6 +2,7 @@ import { Component, AfterViewInit} from '@angular/core';
 import { YoutubePlayerWeb } from 'capacitor-youtube-player'; // Web version
 
 import { Plugins, Capacitor } from '@capacitor/core'; // Native version
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,34 +13,9 @@ export class HomePage implements AfterViewInit{
 
   currentYear = new Date().getFullYear();
 
-  constructor() {}
-
-
-  /* ngAfterViewInit() {
-    if (Capacitor.platform === 'web') {
-      this.initializeYoutubePlayerPluginWeb();
-    } else { // Native
-      this.initializeYoutubePlayerPluginNative();
-    }
-  }
-
-  async initializeYoutubePlayerPluginWeb() {
-    const options = {playerId: 'youtube-player', playerSize: {width: 640, height: 360}, videoId: 'tDW2C6rcH6M'};
-    const result = await YoutubePlayerWeb.initialize(options);
-    console.log('playerReady', result);
-  }
-
-  async destroyYoutubePlayerPluginWeb() {
-    const result = await YoutubePlayerWeb.destroy('youtube-player');
-    console.log('destroyYoutubePlayer', result);
-  }
-
-  async initializeYoutubePlayerPluginNative() {
-    const { YoutubePlayer } = Plugins;
-    const options = {width: 640, height: 360, videoId: 'tDW2C6rcH6M'};
-    const playerReady = await YoutubePlayer.initialize(options);
-  } */
-
+  constructor(
+    private _router: Router
+  ) {}
 
   ngAfterViewInit() {
     if (Capacitor.platform === 'web') {
@@ -47,6 +23,10 @@ export class HomePage implements AfterViewInit{
     } else { // Native
       this.initializeYoutubePlayerPluginNative();
     }
+  }
+
+  route(){
+    this._router.navigate(['view360']);
   }
 
   async initializeYoutubePlayerPluginWeb() {
